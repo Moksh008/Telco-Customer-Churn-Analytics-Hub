@@ -40,6 +40,57 @@ st.markdown("""
         margin-bottom: 20px;
     }
     
+    /* Interactive Hover Cards */
+    .stCard-hover {
+        background: rgba(30, 41, 59, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        backdrop-filter: blur(10px);
+        margin-bottom: 20px;
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease;
+        height: 100%;
+    }
+    .stCard-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25);
+        border-color: rgba(99, 102, 241, 0.5);
+    }
+    
+    /* Main Landing Page Metric Grid Cards */
+    .main-metric-card {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease;
+    }
+    .main-metric-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
+        border-color: rgba(56, 189, 248, 0.5);
+    }
+    .main-metric-value {
+        font-size: 2.2rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #38BDF8 0%, #818CF8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 5px;
+        font-family: 'Outfit', 'Inter', sans-serif;
+    }
+    .main-metric-label {
+        font-size: 0.85rem;
+        color: #94A3B8;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 600;
+    }
+    
     /* Sleek metric badges */
     .metric-badge {
         display: inline-block;
@@ -69,7 +120,7 @@ st.markdown("""
         font-weight: 600;
         border-left: 4px solid #6366F1;
         padding-left: 10px;
-        margin-top: 15px;
+        margin-top: 25px;
         margin-bottom: 15px;
     }
     
@@ -174,7 +225,7 @@ def preprocess_features(df_raw: pd.DataFrame) -> pd.DataFrame:
 
 
 # Sidebar Navigation System
-st.sidebar.markdown('<div style="text-align: center; padding: 15px 0;"><h2 style="color: #6366F1; font-weight: 800; margin: 0;">⚡ CRM SAARTHI</h2></div>', unsafe_allow_html=True)
+st.sidebar.markdown('<div style="text-align: center; padding: 15px 0;"><h2 style="color: #6366F1; font-weight: 800; margin: 0;">⚡ CHURN HUB</h2></div>', unsafe_allow_html=True)
 app_mode = st.sidebar.radio(
     "Dashboard Modules", 
     ["Welcome & Project Overview", "Single Customer Predictor", "Batch CSV Predictor", "Model Global Insights"],
@@ -193,108 +244,168 @@ st.sidebar.info(
 
 # --- TAB 0: WELCOME & PROJECT OVERVIEW (LANDING PAGE) ---
 if app_mode == "Welcome & Project Overview":
-    st.markdown('<h3 class="section-header">⚡ Welcome to CRM Saarthi</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 class="section-header">⚡ Welcome to Churn Hub</h3>', unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class="stCard">
-        <h4 style="color: #38BDF8; font-weight: 700; margin-top: 0;">Project Context & Objective</h4>
-        <p style="font-size: 1.05rem; line-height: 1.6; color: #E2E8F0;">
-            <b>CRM Saarthi</b> is an advanced customer retention predictive hub tailored for telecommunication operators. 
-            In competitive subscription environments, acquiring new customers costs 5x more than retaining existing ones. 
-            This platform uses <b>Machine Learning</b> to predict which subscribers are highly vulnerable to cancellation (churning), 
-            revealing their core risk indicators and helping customer success teams apply immediate, automated retention strategies.
-        </p>
-        <p style="font-size: 1.05rem; line-height: 1.6; color: #E2E8F0;">
-            The model under the hood is a <b>Random Forest Classifier</b> that achieves high predictive accuracy, 
-            empowered by a <b>StandardScaler</b> preprocessing layer that standardizes 19 distinct demographic, service, and contract features.
-        </p>
-        <div style="margin-top: 20px; padding: 15px; background: rgba(99, 102, 241, 0.1); border-left: 4px solid #6366F1; border-radius: 4px;">
-            <span style="font-weight: bold; color: #818CF8;">📓 Machine Learning Research & Modeling:</span> 
-            All exploratory data analysis, visual engineering, hyperparameter tuning, and cross-validation was conducted in detail in our 
-            Kaggle research environment. 
-            <a href="https://www.kaggle.com/code/moksh72/moksh-2410998600-s-ul-project" target="_blank" style="color: #38BDF8; font-weight: 600; text-decoration: underline;">
-                Click here to view our Kaggle Notebook & Development Pipeline.
-            </a>
+    # 4-Column Metric Grid at the Top
+    mcol1, mcol2, mcol3, mcol4 = st.columns(4)
+    with mcol1:
+        st.markdown("""
+        <div class="main-metric-card">
+            <div class="main-metric-value">7,043</div>
+            <div class="main-metric-label">Dataset Records</div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+    with mcol2:
+        st.markdown("""
+        <div class="main-metric-card">
+            <div class="main-metric-value">84.5%</div>
+            <div class="main-metric-label">Inference ROC-AUC</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with mcol3:
+        st.markdown("""
+        <div class="main-metric-card">
+            <div class="main-metric-value">26.5%</div>
+            <div class="main-metric-label">Baseline Churn</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with mcol4:
+        st.markdown("""
+        <div class="main-metric-card">
+            <div class="main-metric-value">19</div>
+            <div class="main-metric-label">Input Parameters</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    st.markdown('<div style="height: 15px;"></div>', unsafe_allow_html=True)
+
+    # Double Column Layout for Context & Blueprint
+    col_left, col_right = st.columns([7, 5])
     
-    st.markdown('<h3 class="section-header">How to Navigate the Platform</h3>', unsafe_allow_html=True)
-    st.markdown("""
-    Use the navigation menu on the <b>left sidebar</b> to jump between the various high-performance modules:
-    """)
+    with col_left:
+        st.markdown("""
+        <div class="stCard" style="height: 100%;">
+            <h4 style="color: #38BDF8; font-weight: 700; margin-top: 0; font-family: 'Outfit', sans-serif;">Analytical Retention Mission</h4>
+            <p style="font-size: 0.98rem; line-height: 1.6; color: #E2E8F0; margin-bottom: 12px;">
+                <b>Churn Hub</b> is an advanced customer retention analytics portal. In highly saturated subscription models, 
+                retaining existing users mathematically yields <b>5x more return on investment</b> than acquiring new ones.
+            </p>
+            <p style="font-size: 0.98rem; line-height: 1.6; color: #E2E8F0; margin-bottom: 15px;">
+                By examining subscriber demographics, services, and billing contracts, our predictive engine flags high-risk accounts 
+                before they request a cancellation, giving service teams a critical window to apply structural retention offers.
+            </p>
+            <div style="padding: 15px; background: rgba(99, 102, 241, 0.12); border-left: 4px solid #6366F1; border-radius: 6px; margin-top: 15px;">
+                <span style="font-weight: bold; color: #818CF8; font-size: 0.9rem;">📓 Kaggle Research Workspace:</span><br/>
+                <span style="font-size: 0.88rem; color: #94A3B8;">All hyperparameter evaluations, random forest grids, and features validation were executed in the Kaggle notebook:</span><br/>
+                <a href="https://www.kaggle.com/code/moksh72/moksh-2410998600-s-ul-project" target="_blank" style="color: #38BDF8; font-weight: 600; text-decoration: underline; font-size: 0.90rem;">
+                    moksh-2410998600-s-ul-project ↗
+                </a>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with col_right:
+        st.markdown("""
+        <div class="stCard" style="height: 100%;">
+            <h4 style="color: #C084FC; font-weight: 700; margin-top: 0; font-family: 'Outfit', sans-serif;">Inference Pipeline Architecture</h4>
+            <p style="font-size: 0.95rem; line-height: 1.5; color: #E2E8F0; margin-bottom: 10px;">
+                When details are submitted, the hub executes a production-grade inference:
+            </p>
+            <div style="font-size: 0.90rem; color: #94A3B8; line-height: 1.6;">
+                🔄 <b>Ordinal Encoding</b>: Maps categorical terms (like Fiber optic, Electronic check) alphabetically to numerical values.<br/>
+                ⚖️ <b>StandardScaler</b>: Normalizes and scales attributes using pre-calculated training means and standard deviations.<br/>
+                🌲 <b>Random Forest Classifier</b>: Infers individual churn probability using an ensemble of decision trees.<br/>
+                💡 <b>Retention Optimizer</b>: Computes key risk factors and selects tailored customer remedies.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    st.markdown('<h3 class="section-header">Interactive Platform Navigation</h3>', unsafe_allow_html=True)
     
-    # 3-Column Grid for Tab Guidance
+    # 3-Column Grid for Tab Guidance (using the new stCard-hover visual transition)
     guide_c1, guide_c2, guide_c3 = st.columns(3)
     
     with guide_c1:
         st.markdown("""
-        <div class="stCard" style="height: 100%; border-top: 4px solid #38BDF8;">
-            <h4 style="color: #38BDF8; font-weight: 700; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                👤 Single Predictor
-            </h4>
+        <div class="stCard-hover" style="border-top: 4px solid #38BDF8;">
+            <h4 style="color: #38BDF8; font-weight: 700; margin-top: 0;">👤 Single Predictor</h4>
             <p style="font-size: 0.92rem; line-height: 1.5; color: #CBD5E1;">
-                <b>For Front-line Support & Account Managers.</b>
+                <b>Designed for front-line reps and account specialists.</b>
             </p>
-            <p style="font-size: 0.92rem; line-height: 1.5; color: #94A3B8;">
-                Manually input a single subscriber's attributes (contracts, payment methods, digital bundle add-ons, monthly costs) 
-                to immediately evaluate their churn risk.
+            <p style="font-size: 0.88rem; line-height: 1.5; color: #94A3B8; margin-bottom: 15px;">
+                Input a single customer's features to get real-time churn predictions, key risk explanations, and 
+                targeted coupon/bundle solutions.
             </p>
-            <p style="font-size: 0.92rem; line-height: 1.5; color: #94A3B8;">
-                <b>Key Feature</b>: Features a real-time <b>"What-If" Retention Simulator</b>. Mock contract migrations or 
-                automatic billing setups to see exactly how much they decrease churn probability before pitching to the customer!
+            <p style="font-size: 0.88rem; line-height: 1.5; color: #94A3B8;">
+                <b>Bonus Feature</b>: The <b>What-If Simulator</b> lets you test how changing a monthly contract to a one-year or two-year term mitigates churn!
             </p>
-            <div style="margin-top: 15px; font-size: 0.85rem; color: #E2E8F0; font-weight: 600;">
-                ➡️ <i>Choose "Single Customer Predictor" in the sidebar to begin.</i>
+            <div style="font-size: 0.85rem; color: #E2E8F0; font-weight: 600; margin-top: 15px;">
+                ➡️ <i>Select Single Predictor in the sidebar.</i>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
     with guide_c2:
         st.markdown("""
-        <div class="stCard" style="height: 100%; border-top: 4px solid #F59E0B;">
-            <h4 style="color: #F59E0B; font-weight: 700; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                📁 Batch CSV Predictor
-            </h4>
+        <div class="stCard-hover" style="border-top: 4px solid #F59E0B;">
+            <h4 style="color: #F59E0B; font-weight: 700; margin-top: 0;">📁 Batch CSV Predictor</h4>
             <p style="font-size: 0.92rem; line-height: 1.5; color: #CBD5E1;">
-                <b>For Executive Campaigns & Growth Marketing.</b>
+                <b>Designed for database analysts and marketing directors.</b>
             </p>
-            <p style="font-size: 0.92rem; line-height: 1.5; color: #94A3B8;">
-                Process entire customer lists in one go. Upload a bulk customer CSV table, and run automated scoring 
-                on thousands of accounts in parallel.
+            <p style="font-size: 0.88rem; line-height: 1.5; color: #94A3B8; margin-bottom: 15px;">
+                Upload a structured customer sheet to score hundreds of profiles simultaneously. 
+                View campaign aggregate counts, risk histograms, and scatter plots.
             </p>
-            <p style="font-size: 0.92rem; line-height: 1.5; color: #94A3B8;">
-                <b>Key Feature</b>: Generates aggregate campaign insights (total predicted churn rate, average risk, risk distribution histograms) 
-                and provides a simple downloadable scored dataset spreadsheet.
+            <p style="font-size: 0.88rem; line-height: 1.5; color: #94A3B8;">
+                <b>Bonus Feature</b>: Instantly download the complete evaluated database as a scored spreadsheet report.
             </p>
-            <div style="margin-top: 15px; font-size: 0.85rem; color: #E2E8F0; font-weight: 600;">
-                ➡️ <i>Choose "Batch CSV Predictor" in the sidebar to upload files.</i>
+            <div style="font-size: 0.85rem; color: #E2E8F0; font-weight: 600; margin-top: 15px;">
+                ➡️ <i>Select Batch Predictor in the sidebar.</i>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
     with guide_c3:
         st.markdown("""
-        <div class="stCard" style="height: 100%; border-top: 4px solid #818CF8;">
-            <h4 style="color: #818CF8; font-weight: 700; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                📊 Model Global Insights
-            </h4>
+        <div class="stCard-hover" style="border-top: 4px solid #818CF8;">
+            <h4 style="color: #818CF8; font-weight: 700; margin-top: 0;">📊 Model Global Insights</h4>
             <p style="font-size: 0.92rem; line-height: 1.5; color: #CBD5E1;">
-                <b>For Business Leaders & Product Managers.</b>
+                <b>Designed for executives and business strategists.</b>
             </p>
-            <p style="font-size: 0.92rem; line-height: 1.5; color: #94A3B8;">
-                Examine global model weights and feature importances. Identify the major global risk factors 
-                that drive customer cancellations across the entire user base.
+            <p style="font-size: 0.88rem; line-height: 1.5; color: #94A3B8; margin-bottom: 15px;">
+                Review the global mathematical weights derived by the Random Forest model across 7,000+ accounts.
             </p>
-            <p style="font-size: 0.92rem; line-height: 1.5; color: #94A3B8;">
-                <b>Key Feature</b>: Visualizes Random Forest weights in a Plotly graph and provides concrete 
-                executive suggestions to reduce global churn structural rates.
+            <p style="font-size: 0.88rem; line-height: 1.5; color: #94A3B8;">
+                <b>Bonus Feature</b>: Provides direct, data-backed operational takeaways (like contract migration and autopay transitions) to structurally cure churn.
             </p>
-            <div style="margin-top: 15px; font-size: 0.85rem; color: #E2E8F0; font-weight: 600;">
-                ➡️ <i>Choose "Model Global Insights" in the sidebar to view analytics.</i>
+            <div style="font-size: 0.85rem; color: #E2E8F0; font-weight: 600; margin-top: 15px;">
+                ➡️ <i>Select Model Global Insights in the sidebar.</i>
             </div>
         </div>
         """, unsafe_allow_html=True)
+        
+    st.markdown('<h3 class="section-header">🧠 Frequently Asked Questions</h3>', unsafe_allow_html=True)
+    
+    with st.expander("💡 Why is predicting customer churn critical for telecom operators?"):
+        st.markdown("""
+        Customer churn prediction is a direct driver of operational profitability. In telecommunication services:
+        - **Higher Acquisition Cost**: Reaching new users through advertisements and promotions is significantly more expensive than keeping active accounts.
+        - **Structural Customer Lock-in**: Flagging early risk parameters allows agents to pitch digital bundles (like online security or backup services) that raise the structural switching cost for the subscriber.
+        """)
+        
+    with st.expander("🧠 How does the Random Forest Machine Learning model calculate churn risk?"):
+        st.markdown("""
+        The backend engine loads a **Random Forest Classifier**:
+        - **Ensemble of Decision Trees**: It predicts churn by running customer features down an ensemble of hundreds of decision trees, each trained on boot-strapped samples.
+        - **Probability Estimation**: Rather than outputting a simple Yes/No, it aggregates tree decisions to output a continuous risk probability (0% to 100%), which provides the granular risk categories on our dashboard.
+        """)
+        
+    with st.expander("🛡️ What are target retention strategies, and how do they help?"):
+        st.markdown("""
+        Targeted retention strategies are customized offers based on the customer's vulnerable feature configuration:
+        - **Month-to-month contracts** are the leading driver of cancellations; migrating them to long contracts via loyalty discounts permanently cures this risk.
+        - **Autopay registrations** eliminate check friction, showing significantly lower churn rates in history.
+        """)
 
 
 # --- TAB 1: SINGLE CUSTOMER PREDICTOR ---
@@ -871,6 +982,6 @@ elif app_mode == "Model Global Insights":
 # --- FOOTER ---
 st.markdown("""
 <div class="footer">
-    <p>CRM Saarthi - Customer Retention Management System | Powered by RandomForestClassifier | Version 1.0.0 Pro</p>
+    <p>Churn Hub - Customer Churn Prediction System | Powered by RandomForestClassifier | Version 1.0.0 Pro</p>
 </div>
 """, unsafe_allow_html=True)

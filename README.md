@@ -40,7 +40,7 @@ The machine learning modeling, exploratory data analysis (EDA), feature engineer
 The platform is structured into four distinct high-performance modules, accessible via the left-side navigation panel:
 
 ### 1. 🏠 Welcome & Project Overview (Landing Page)
-- **Purpose**: Serves as the executive gateway to the CRM Saarthi platform.
+- **Purpose**: Serves as the executive gateway to the Churn Hub platform.
 - **Use Case**: Provides context on the underlying business problem, explains the machine learning pipeline, and details how to utilize each predictive dashboard tab to maximize subscriber lifetime value.
 
 ### 2. 👤 Single Customer Predictor & "What-If" Simulator
